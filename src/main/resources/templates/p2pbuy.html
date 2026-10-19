@@ -1,0 +1,108 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>BitXchange - P2P Buy</title>
+    <link rel="stylesheet" th:href="@{/styles.css}" />
+</head>
+<body>
+<!--Header-->
+<header>
+    <div class="header-content">
+        <div class="left-section">
+            <div class="logo-brand">
+                <img th:src="@{/images/Capture.png}" />
+                <h1 class="brand">BitXchange</h1>
+            </div>
+            <nav class="left-nav">
+                <a th:href="@{/dashboard}">Home</a>
+                <a th:href="@{/market}">Market</a>
+                <a th:href="@{/trade}">Trade</a>
+                <a th:href="@{/asset}">Asset</a>
+                <a th:href="@{/profile}">Profile</a>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+    <h2>Buy Crypto via P2P</h2>
+    <p>Select a merchant and pay securely to buy crypto.</p>
+</section>
+
+<div th:if="${success}" class="success-message">
+    Buy completed successfully!
+</div>
+
+<div th:if="${error}" class="error-message">
+    Merchant not found or something went wrong.
+</div>
+
+
+<!-- P2P Market Table -->
+<section class="p2p-market">
+    <table class="market-table">
+        <thead>
+        <tr>
+            <th>Merchant</th>
+            <th>Payment Method</th>
+            <th>User Account</th>
+            <th>Price (USDT)</th>
+            <th>Available</th>
+            <th>Amount</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="merchant : ${merchantList}">
+            <td th:text="${merchant.name}">Crypto Boss</td>
+            <td th:text="${merchant.paymentMethod}">Bank Transfer</td>
+            <td th:text="${merchant.userAccount}">2349670853</td>
+            <td th:text="${merchant.price}">1.00</td>
+            <td th:text="${merchant.available} + ' USDT'">1000 USDT</td>
+                <form th:action="@{/p2pbuy/buy}" method="post" class="inline-form">
+                    <input type="hidden" name="merchantId" th:value="${merchant.id}" />
+                    <td>
+                    <input type="number" name="amount" class="amount-input" placeholder="Enter amount" required min="1" />
+                    </td>
+                    <td>
+                    <button type="submit" class="btn">Buy</button>
+
+                    </td>
+                </form>
+        </tr>
+        </tbody>
+    </table>
+</section>
+
+<!-- Transaction History -->
+<section class="transaction-history">
+    <h3 class="section-title">Transaction History</h3>
+    <table class="history-table">
+        <thead>
+        <tr>
+            <th>Type</th>
+            <th>Merchant</th>
+            <th>Amount (USDT)</th>
+            <th>Payment Method</th>
+            <th>Status</th>
+            <th>Date</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="tx : ${transactionList}">
+            <td th:text="${tx.type}">Buy</td>
+            <td th:text="${tx.merchantName}">Merchant</td>
+            <td th:text="${tx.amount}">100</td>
+            <td th:text="${tx.paymentMethod}">Bank Transfer</td>
+            <td th:class="'status-' + ${tx.status.toLowerCase()}" th:text="${tx.status}">Completed</td>
+            <td th:text="${tx.date}">2025-06-17</td>
+        </tr>
+        </tbody>
+    </table>
+</section>
+</body>
+</html>

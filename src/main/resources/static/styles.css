@@ -1,0 +1,1273 @@
+/* index */
+body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    background-color: #0f1218;
+    color: #ffffff;
+}
+
+header {
+    background-color: #1a1d24;
+    padding: 1rem 2rem;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.left-section {
+    display: flex;
+    align-items: center;
+}
+
+.logo-brand {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    height: 32px;
+    width: auto;
+    margin-right: 0.5rem;
+}
+
+.brand {
+    font-size: 1.5rem;
+    color: #00c896;
+    margin: 0;
+    margin-right: 1.5rem;
+}
+
+.left-nav {
+    display: flex;
+    align-items: center;
+}
+
+.left-nav a {
+    color: #f9f9f9;
+    margin-right: 1rem;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.left-nav a:hover {
+    color: #00c896;
+    text-decoration: none;
+}
+
+.right-nav {
+    display: flex;
+    align-items: center;
+}
+
+.right-nav a {
+    color: #f9f9f9;
+    margin-left: 1rem;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.right-nav a:hover {
+    color: #00c896;
+    text-decoration: none;
+}
+
+main {
+    display: flex;
+    justify-content: space-between;
+    padding: 3rem 2rem;
+}
+
+.hero {
+    flex: 1;
+    text-align: left;
+}
+
+.hero h2 {
+    font-size: 3rem;
+}
+
+.hero p {
+    color: #ccc;
+    margin-top: 1rem;
+    font-size: 1.5rem;
+}
+
+.btn {
+    display: inline-block;
+    margin-top: 1.5rem;
+    padding: 0.75rem 1.5rem;
+    background-color: #00c896;
+    color: #0f1218;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.btn:hover {
+    background-color: #00a57e;
+}
+
+.crypto-prices {
+    margin-left: 3rem;
+    max-width: 250px;
+}
+
+.crypto-prices img {
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+}
+.market-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #1a1d24;
+    margin-top: 1rem;
+}
+
+.market-table th,
+.market-table td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #2a2d34;
+    text-align: left;
+}
+
+.market-table th {
+    color: #aaa;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
+
+.market-table td {
+    color: #f9f9f9;
+}
+
+.market-table tr:hover td {
+    background-color: #2a2d34;
+}
+
+.positive {
+    color: #00ff99;
+}
+
+.negative {
+    color: #ff4d4d;
+}
+.auth-container {
+    max-width: 400px;
+    margin: 5rem auto;
+    padding: 2rem;
+    background-color: #1a1d24;
+    border-radius: 8px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
+}
+
+.auth-container h2 {
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.auth-container form input {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1.2rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.password-field {
+    position: relative;
+}
+
+.password-field input {
+    width: 100%;
+    padding-right: 3rem;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 1.1rem;
+    color: #ccc;
+}
+.fade-out {
+    animation: fadeOut 0.5s forwards;
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+}
+
+
+/* login sign logo name */
+.simple-header {
+    background-color: #1a1d24;
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+}
+
+.simple-header .logo-brand {
+    display: flex;
+    align-items: center;
+}
+
+.simple-header .logo {
+    height: 32px;
+    width: auto;
+    margin-right: 0.5rem;
+}
+
+.simple-header .brand {
+    font-size: 1.5rem;
+    color: #00c896;
+    margin: 0;
+}
+
+/* Dropdown with slide animation */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-toggle {
+    color: #f9f9f9;
+    text-decoration: none;
+    font-weight: bold;
+    margin-right: 1rem;
+    cursor: pointer;
+}
+
+.dropdown-menu {
+    display: block;
+    opacity: 0;
+    transform: translateY(-10px);
+    pointer-events: none;
+    position: absolute;
+    background-color: #1a1d24;
+    top: 2rem;
+    left: 0;
+    z-index: 1000;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    width: 220px;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.dropdown:hover .dropdown-menu {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.dropdown-item {
+    display: block;
+    padding: 0.5rem 0;
+    color: #f9f9f9;
+    text-decoration: none;
+    font-weight: normal;
+}
+
+.dropdown-item span {
+    color: #bbb;
+    font-size: 0.85rem;
+}
+
+.dropdown-item:hover {
+    color: #00c896;
+}
+
+/* buy crypto hover */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #1a1d24;
+    border: 1px solid #2a2d34;
+    min-width: 220px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    z-index: 1000;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown-item {
+    padding: 0.75rem 1rem;
+    color: #f9f9f9;
+    text-decoration: none;
+    display: block;
+    border-bottom: 1px solid #2a2d34;
+}
+
+.dropdown-item span {
+    color: #aaa;
+    font-size: 0.85rem;
+}
+
+.dropdown-item:hover {
+    background-color: #2a2d34;
+    color: #00c896;
+}
+
+/*Dashboard Layout Enhancements*/
+
+.dashboard-main {
+    padding: 0rem 0rem 0 0rem;
+    max-width: 1500px;
+    margin: 0rem auto 0 auto;
+}
+
+/*Left-align asset section near top*/
+.asset-section {
+    margin-top: 1rem;
+    margin-left: 0;
+    text-align: left;
+}
+
+/* Heading style */
+.asset-section h2 {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+}
+
+/* Input + Icon + Button row */
+.asset-value-field {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* Asset value display */
+.asset-value-field input {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    width: 200px;
+    text-align: left;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #333;
+}
+
+/* Toggle icon style */
+#toggleAsset {
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: #555;
+}
+
+/* Add Funds Button */
+.add-funds-button {
+    padding: 0.5rem 1rem;
+    background-color: #007bff;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.add-funds-button:hover {
+    background-color: #0056b3;
+}
+
+/* news box settings */
+.news-box {
+    width: 500px;
+    max-height: 400px;
+    background-color: #1a1d24;
+    padding: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+}
+
+.news-title {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #00c896;
+    margin-bottom: 1rem;
+}
+
+.news-scroll {
+    overflow-y: auto;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding-right: .5rem;
+}
+
+.news-item {
+    background-color: #2a2d34;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    color: #f9f9f9;
+}
+
+.news-item strong {
+    display: block;
+    margin-bottom: 0.25rem;
+    color: #ffffff;
+}
+
+.news-item p {
+    font-size: 0.85rem;
+    color: #ccc;
+    margin: 0;
+}
+
+/* Optional scrollbar styling */
+.news-scroll::-webkit-scrollbar {
+    width: 6px;
+}
+
+.news-scroll::-webkit-scrollbar-thumb {
+    background-color: #444;
+    border-radius: 3px;
+}
+
+/* watchlish settings */
+.watchlist-item {
+    display: flex;
+    height: 2rem;
+    width: 40rem;
+    justify-content: space-between;
+    /*align-items:;*/
+    background-color: #2a2d34;
+    padding: .4rem 0.5rem;
+    border-radius: 8px;
+    color: #f9f9f9;
+}
+
+.watchlist-left {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.watchlist-right {
+    display: flex;
+    /*align-items: left;*/
+    gap: 0.75rem;
+}
+
+.coin-logo {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}
+
+.coin-name {
+    font-weight: 500;
+    color: #ffffff;
+    text-align: center;
+}
+
+.coin-price {
+    font-size: 0.95rem;
+    color: #00ffae;
+}
+
+.remove-icon {
+    cursor: pointer;
+    font-size: 1rem;
+    color: #ff5e5e;
+    transition: transform 0.2s ease;
+}
+
+.remove-icon:hover {
+    transform: scale(1.2);
+}
+
+
+
+
+/* trade page ui start */
+/*Spot/Future tab switch*/
+.trade-type-tabs {
+    display: flex;
+    gap: 1rem;
+    margin: 0rem 0rem 0rem 0rem;
+    border-bottom: 1px solid #2a2d34;
+}
+
+.trade-tab {
+    padding: 0.75rem 1.5rem;
+    font-weight: bold;
+    background-color: transparent;
+    border: none;
+    border-bottom: 3px solid transparent;
+    color: #f9f9f9;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.trade-tab.active {
+    border-bottom: 3px solid #00c896;
+    color: #00c896;
+}
+
+.trade-tab:hover {
+    color: #00c896;
+}
+
+/*Coin Selector Panel*/
+.dashboard-main {
+    display: flex;
+    flex-direction: column;
+}
+
+.coin-selector-container {
+    margin-top: 1rem;
+    margin-left: 0;
+    align-self: flex-start;
+}
+
+.trade-type-tabs {
+    margin-bottom: 1rem;
+}
+
+.coin-selector {
+    position: relative;
+}
+
+.coin-selector-btn {
+    background-color: #1a1d24;
+    color: #f9f9f9;
+    border: 1px solid #2a2d34;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.coin-selector-btn .arrow {
+    margin-left: 0.5rem;
+}
+
+.coin-dropdown-panel {
+    display: none;
+    position: absolute;
+    top: 2.8rem;
+    left: 0;
+    width: 260px;
+    background-color: #1a1d24;
+    border: 1px solid #2a2d34;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+    padding: 0.75rem;
+}
+
+.coin-search {
+    width: 90%;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+    border: none;
+    border-radius: 2px;
+    background-color: #0f1218;
+    color: #f9f9f9;
+}
+
+.coin-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.4rem 0;
+    border-bottom: 1px solid #2a2d34;
+}
+
+.coin-left {
+    color: #f9f9f9;
+    font-weight: bold;
+}
+
+.coin-right {
+    text-align: right;
+}
+
+.coin-price {
+    color: #f9f9f9;
+}
+
+.coin-change {
+    font-size: 0.85rem;
+}
+
+.coin-change.positive {
+    color: #00ff99;
+}
+
+.coin-change.negative {
+    color: #ff4d4d;
+}
+
+/* Toggle dropdown show */
+.coin-dropdown-panel.open {
+    display: block;
+}
+
+/* buy sell toggle */
+.buy-sell-toggle {
+    display: flex;
+    border-radius: 999px;
+    overflow: hidden;
+    width: fit-content;
+    border: 1px solid #2a2d34;
+    margin-top: 1rem;
+}
+
+.buy-sell-btn {
+    padding: 0.5rem 1.5rem;
+    border: none;
+    background-color: #1a1d24;
+    color: #ccc;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.buy-sell-btn.active {
+    background-color: #00c896;
+    color: #0f1218;
+}
+
+.buy-sell-btn:not(.active):hover {
+    background-color: #2a2d34;
+    color: #f9f9f9;
+}
+
+/* buy sell toggle spacing */
+.buy-sell-toggle {
+    display: flex;
+    border-radius: 999px;
+    overflow: hidden;
+    width: fit-content;
+    border: 1px solid #2a2d34;
+    margin: 1.5rem 0 0 0; /*adds space from top*/
+}
+
+/* price input setting */
+.price-input-box {
+    margin-top: 1rem;
+    background-color: #e9ecef;
+    padding: 0.3rem 0.3rem;
+    border-radius: 9px;
+    display: inline-block;
+    min-width: 70px;
+    position: relative;
+}
+
+.price-label {
+    font-size: 0.75rem;
+    color: #6c757d;
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+.price-input-box input {
+    border: none;
+    background: transparent;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #000;
+    width: 60%;
+    outline: none;
+}
+
+
+.quantity-input-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f5f5f5;
+    border-radius: 12px;
+    padding: 12px 16px;
+    margin-top: 16px;
+    font-size: 14px;
+    color: #555;
+    font-weight: 500;
+}
+
+.quantity-label,
+.quantity-coin {
+    user-select: none;
+}
+
+
+/* order input box */
+.order-value-input-box {
+    display: flex;
+    flex-direction: column;
+    background-color: #f5f5f5;
+    border-radius: 12px;
+    padding: 10px 14px;
+    margin-top: 14px;
+}
+
+.order-value-input-box .order-label {
+    font-size: 10px;
+    color: #777;
+    margin-bottom: 6px;
+    font-weight: 500;
+}
+
+.order-value-input-box input {
+    border: none;
+    background: transparent;
+    font-size: 16px;
+    color: #333;
+    outline: none;
+}
+
+/* buy/sell button settings */
+.hidden {
+    display: none;
+}
+
+.trade-action-button {
+    margin-top: 1rem;
+    text-align: left;
+}
+
+.buy-action-btn,
+.sell-action-btn {
+    padding: 1rem 2rem;
+    font-size: 1.3rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.buy-action-btn {
+    background-color: #00c853;
+    color: white;
+}
+
+.sell-action-btn {
+    background-color: #d50000;
+    color: white;
+}
+
+
+
+/* order history */
+.trade-layout {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 24px;
+    margin-top: 24px;
+    flex-wrap: wrap;
+}
+
+.trade-left {
+    flex: 1 1 60%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.trade-right {
+    flex: 0 0 35%;
+}
+
+.order-history-panel {
+    background-color: #1e1e2f;
+    padding: 10px;
+    border-radius: 20px;
+    color: #fff;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+}
+.order-history-title {
+    font-size: 15px;
+    margin-bottom: 8px;
+}
+
+.order-history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.empty-order-msg {
+    color: #aaa;
+    font-style: italic;
+}
+
+
+/* market ui starts */
+.section-box {
+    background-color: #1a1d24;
+    padding: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 1000px;
+    margin: 2rem auto;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.section-title {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #00c896;
+    margin: 0;
+}
+
+.input-field {
+    background-color: #2a2d34;
+    border: 1px solid #333;
+    padding: 0.5rem 0.75rem;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 1rem;
+}
+
+.input-field::placeholder {
+    color: #888;
+}
+
+.table-box {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    max-height: 500px;
+}
+
+.table-header,
+.table-row {
+    display: grid;
+    grid-template-columns: 2fr 2fr 2fr 2fr;
+    padding: 0.75rem 1rem;
+    align-items: center;
+}
+
+.table-header {
+    background-color: #2a2d34;
+    font-weight: bold;
+    color: #ccc;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.table-row {
+    border-bottom: 1px solid #2f2f2f;
+    color: #f1f1f1;
+    transition: background-color 0.2s;
+}
+
+.table-row:hover {
+    background-color: #2f323d;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.text-positive {
+    color: #00c896;
+    font-weight: 500;
+}
+
+.text-negative {
+    color: #ff4d4f;
+    font-weight: 500;
+}
+
+.table-box::-webkit-scrollbar {
+    width: 6px;
+}
+
+.table-box::-webkit-scrollbar-thumb {
+    background-color: #444;
+    border-radius: 3px;
+}
+
+
+/*CHART PAGE STYLES*/
+
+.chart-container {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 1rem;
+    background-color: #1a1d24;
+    border-radius: 12px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
+}
+
+.chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.pair-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.price-stats {
+    text-align: right;
+}
+
+.current-price {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #00c896;
+    display: block;
+}
+
+.price-change.up {
+    color: #00c896;
+}
+
+.price-change.down {
+    color: #e74c3c;
+}
+
+.sub-info {
+    font-size: 0.9rem;
+    color: #aaa;
+}
+
+.timeframe-buttons {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.tf-btn {
+    padding: 0.4rem 0.8rem;
+    background-color: #2a2d34;
+    color: #f1f1f1;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.tf-btn.active {
+    background-color: #00c896;
+    color: #fff;
+}
+
+.candlestick-box {
+    width: 100%;
+    height: 400px;
+    margin-bottom: 1rem;
+}
+
+.percentage-changes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    font-size: 0.95rem;
+    color: #ccc;
+}
+
+.change-row {
+    display: flex;
+    justify-content: space-between;
+    width: 150px;
+}
+
+.change-row .up {
+    color: #00c896;
+}
+
+.change-row .down {
+    color: #e74c3c;
+}
+
+/* market page new  */
+
+.watchlist-icon {
+    color: #888;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.watchlist-icon:hover {
+    color: #FFD700; /* gold */
+}
+
+.table-row.clickable:hover {
+    background-color: #2a2d34;
+    cursor: pointer;
+}
+
+/* asset page starts */
+.funds-buttons {
+    display: flex;
+    gap: 0.75rem;
+    margin-left: 1rem;
+}
+
+.withdraw-button {
+    background-color: #e74c3c;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.withdraw-button:hover {
+    background-color: #c0392b;
+}
+
+/* coin holding */
+.coin-holdings-section {
+    margin-top: 2rem;
+    padding: 1rem;
+}
+
+.coin-holdings-section h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: #f9f9f9;
+}
+
+.coin-holdings-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.coin-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1a1d24;
+    padding: 0.75rem 1rem;
+    border-radius: 12px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+}
+
+.coin-info {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.coin-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+}
+
+.coin-info strong {
+    color: #ffffff;
+    font-size: 1rem;
+}
+
+.coin-info p {
+    color: #aaa;
+    font-size: 0.85rem;
+    margin: 0;
+}
+
+.coin-amounts {
+    text-align: right;
+}
+
+.coin-amounts > div:first-child {
+    color: #ffffff;
+    font-size: 0.95rem;
+}
+
+.usd-text {
+    color: #ccc;
+    font-size: 0.85rem;
+}
+
+
+
+/* buy sell settings */
+.market-table .btn {
+    background-color: #00c896;
+    color: white;
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.market-table .btn:hover {
+    background-color: #00a67d;
+}
+
+
+
+
+
+
+/* transaction history */
+.transaction-history {
+    margin-top: 2rem;
+    background-color: #1a1d24;
+    padding: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
+}
+
+.section-title {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #00c896;
+    margin-bottom: 0.75rem;
+}
+
+.history-table {
+    width: 100%;
+    border-collapse: collapse;
+    color: #f9f9f9;
+    font-size: 0.95rem;
+}
+
+.history-table th,
+.history-table td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid #333;
+}
+
+.history-table th {
+    color: #ccc;
+    background-color: #2a2d34;
+}
+
+.status-complete {
+    color: #00c896;
+    font-weight: bold;
+}
+
+.status-pending {
+    color: #ffc107;
+    font-weight: bold;
+}
+
+.status-failed {
+    color: #ff4d4d;
+    font-weight: bold;
+}
+
+/* profile settings */
+/* Profile container layout */
+.profile-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* Profile info box styling */
+.profile-box {
+    background-color: #1a1d24;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Text formatting inside profile box */
+.profile-info p,
+.payment-method p {
+    color: #f0f0f0;
+    margin-bottom: 0.5rem;
+}
+
+/* Buttons inside profile section */
+.profile-info .btn.small,
+.payment-methods .btn.small {
+    margin-right: 0.5rem;
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+    padding: 0.3rem 0.8rem;
+}
+
+/* Payment methods layout */
+.payment-methods {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* Danger zone for logout */
+.danger-zone {
+    text-align: center;
+}
+
+.btn.danger {
+    background-color: #d9534f;
+    color: #fff;
+}
+
+.btn.danger:hover {
+    background-color: #c9302c;
+}
+
+/*error message*/
+.error-message {
+    background-color: #ffdddd;
+    border-left: 5px solid #f44336;
+    color: #a94442;
+    padding: 10px 15px;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+}
+
+/*error success message*/
+.success-message {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 10px 15px;
+    border-radius: 4px;
+    margin: 15px 0;
+    font-weight: bold;
+}
+
+.error-message {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 10px 15px;
+    border-radius: 4px;
+    margin: 15px 0;
+    font-weight: bold;
+}

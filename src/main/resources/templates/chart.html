@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <title>BitXchange - Chart</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" th:href="@{/styles.css}" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
+</head>
+<body>
+
+<!-- Chart Container -->
+<div class="chart-container">
+
+  <!-- Header -->
+  <div class="chart-header">
+    <h2 class="pair-title" th:text="${pairName}">BTC/USDT</h2>
+
+    <div class="price-stats">
+      <span class="current-price" th:text="${currentPrice}">$108,531.00</span>
+      <span class="price-change up" th:text="${priceChange}">+3.65%</span>
+      <div class="sub-info">≈$108,552.68 • Public Chain</div>
+    </div>
+  </div>
+
+  <!-- Timeframe Buttons -->
+  <div class="timeframe-buttons">
+    <button class="tf-btn active" data-tf="1m">1m</button>
+    <button class="tf-btn" data-tf="15m">15m</button>
+    <button class="tf-btn" data-tf="1h">1h</button>
+    <button class="tf-btn" data-tf="4h">4h</button>
+    <button class="tf-btn" data-tf="8h">8h</button>
+    <button class="tf-btn" data-tf="1d">1D</button>
+  </div>
+
+  <!-- Candlestick Chart -->
+  <div id="candlestick-chart" class="candlestick-box"></div>
+
+  <!-- Percentage Change Info -->
+  <div class="percentage-changes">
+    <div class="change-row">
+      <span>Today</span><span class="up">+2.78%</span>
+    </div>
+    <div class="change-row">
+      <span>7 days</span><span class="down">-1.55%</span>
+    </div>
+    <div class="change-row">
+      <span>30 days</span><span class="up">+5.25%</span>
+    </div>
+    <div class="change-row">
+      <span>90 days</span><span class="up">+31.22%</span>
+    </div>
+    <div class="change-row">
+      <span>180 days</span><span class="up">+8.29%</span>
+    </div>
+  </div>
+</div>
+
+<!-- Chart Script -->
+<script>
+  const chart = LightweightCharts.createChart(document.getElementById('candlestick-chart'), {
+    width: 800,
+    height: 400,
+    layout: {
+      backgroundColor: '#1a1d24',
+      textColor: '#ccc'
+    },
+    grid: {
+      vertLines: { color: '#2a2d34' },
+      horzLines: { color: '#2a2d34' }
+    },
+    timeScale: {
+      timeVisible: true,
+      secondsVisible: false,
+    },
+    crosshair: {
+      mode: LightweightCharts.CrosshairMode.Normal,
+    },
+  });
+
+  const candleSeries = chart.addCandlestickSeries({
+    upColor: '#00c896',
+    downColor: '#e74c3c',
+    borderVisible: false,
+    wickUpColor: '#00c896',
+    wickDownColor: '#e74c3c',
+  });
+
+  // Dummy data (backend can replace via Thymeleaf + JS)
+  candleSeries.setData([
+    { time: 1718606400, open: 108200, high: 108800, low: 107800, close: 108531 },
+    { time: 1718607000, open: 108531, high: 109000, low: 108400, close: 108700 },
+    { time: 1718607600, open: 108700, high: 108900, low: 108500, close: 108100 },
+    { time: 1718608200, open: 108100, high: 108600, low: 107900, close: 108400 },
+  ]);
+
+  document.querySelectorAll('.tf-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tf-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const tf = btn.getAttribute('data-tf');
+      // In future: fetch new candle data based on selected tf via AJAX/Thymeleaf
+      console.log("Selected TF:", tf);
+    });
+  });
+</script>
+
+</body>
+</html>

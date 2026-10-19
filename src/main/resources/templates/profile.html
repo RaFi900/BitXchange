@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BitXchange - Profile</title>
+  <link rel="stylesheet" th:href="@{/styles.css}" />
+</head>
+<body>
+<header>
+  <div class="header-content">
+    <div class="left-section">
+      <div class="logo-brand">
+        <img th:src="@{/images/Capture.png}" />
+        <h1 class="brand">BitXchange</h1>
+      </div>
+      <nav class="left-nav">
+        <a th:href="@{/dashboard}">Home</a>
+        <a th:href="@{/market}">Market</a>
+        <a th:href="@{/trade}">Trade</a>
+        <a th:href="@{/asset}">Asset</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main class="profile-container">
+
+  <section class="profile-box danger-zone">
+    <form th:action="@{/logout}" method="post">
+      <button type="submit" class="btn danger">Logout</button>
+    </form>
+  </section>
+</main>
+</body>
+</html>

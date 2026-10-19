@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>BitXchange - Trade</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" th:href="@{/styles.css}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+
+<!-- Navigation Bar -->
+<header>
+    <div class="header-content">
+        <div class="left-section">
+            <div class="logo-brand">
+                <img th:src="@{/images/Capture.png}" />
+                <h1 class="brand">BitXchange</h1>
+            </div>
+            <nav class="left-nav">
+                <a th:href="@{/dashboard}">Home</a>
+                <a th:href="@{/market}">Market</a>
+
+                <a th:href="@{/asset}">Asset</a>
+                <a th:href="@{/profile}">Profile</a>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<main class="dashboard-main">
+
+    <!-- Spot / Future Tabs -->
+    <div class="trade-type-tabs">
+        <button class="trade-tab active" id="spotTab">Spot</button>
+        <button class="trade-tab" id="futureTab">Future</button>
+    </div>
+
+    <!-- Coin Selector Section -->
+    <div class="coin-selector-container">
+        <div class="coin-selector">
+            <button class="coin-selector-btn" id="coinDropdownToggle">
+                BTC/USDT <span class="arrow">&#9662;</span>
+            </button>
+
+            <div class="coin-dropdown-panel" id="coinDropdownPanel">
+                <input type="text" class="coin-search" id="coinSearchInput" placeholder="Search coin..." />
+                <!-- Thymeleaf dynamic coin list example -->
+                <div th:each="coin : ${coins}" class="coin-item">
+                    <div class="coin-left" th:text="${coin.name}">BTC/USDT</div>
+                    <div class="coin-right">
+                        <div class="coin-price" th:text="${coin.price}">$67,500</div>
+                        <div class="coin-change" th:classappend="${coin.change > 0} ? 'positive' : 'negative'"
+                             th:text="${coin.change + '%'}">+2.3%</div>
+                    </div>
+                </div>
+                <div th:each="order : ${orders}">
+                    <p th:text="'[' + ${order.type} + '] ' + ${order.coinName} + ' Qty: ' + ${order.quantity} + ', Value: $' + ${order.totalAmount}"></p>
+                </div>
+
+            </div>
+
+            <!-- Buy/Sell Toggle -->
+            <div class="buy-sell-toggle">
+                <button class="buy-sell-btn active" id="buyBtn">Buy</button>
+                <button class="buy-sell-btn" id="sellBtn">Sell</button>
+            </div>
+
+            <!-- Price Input -->
+            <div class="price-input-box">
+                <span class="price-label">Price(USDT)</span>
+                <input type="text" id="coin-price" name="coin-price" placeholder="0.0000" />
+            </div>
+
+            <!-- Quantity Input -->
+            <div class="price-input-box">
+                <span class="price-label">Quantity</span>
+                <input type="text" id="coin-quantity" name="coin-quantity" placeholder="0.0000" />
+            </div>
+
+            <!-- Order Value Input -->
+            <div class="order-value-input-box">
+                <span class="order-label">Order value (USDT)</span>
+                <input type="text" id="order-value" name="order-value" placeholder="0.0000" />
+            </div>
+
+            <!-- Trade Action Button -->
+            <div class="trade-action-button">
+                <button id="buyActionBtn" class="buy-action-btn">Buy</button>
+                <button id="sellActionBtn" class="sell-action-btn hidden">Sell</button>
+            </div>
+
+            <!-- Order History -->
+            <div class="trade-right">
+                <div class="order-history-panel">
+                    <h3 class="order-history-title">Order History</h3>
+                    <div class="order-history-list" id="orderHistoryList">
+                        <p class="empty-order-msg">No orders yet</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="trade-layout"></div>
+
+</main>
+
+<!-- JavaScript (embedded inline) -->
+<script>
+
+
+        document.addEventListener("DOMContentLoaded", () => {
+        const dropdownToggle = document.getElementById("coinDropdownToggle");
+        const dropdownPanel = document.getElementById("coinDropdownPanel");
+        const coinItems = document.querySelectorAll(".coin-item");
+        const coinSearchInput = document.getElementById("coinSearchInput");
+
+        const priceInput = document.getElementById("coin-price");
+        const quantityInput = document.getElementById("coin-quantity");
+        const orderValueInput = document.getElementById("order-value");
+        const orderHistoryList = document.getElementById("orderHistoryList");
+
+        const buyBtn = document.getElementById("buyBtn");
+        const sellBtn = document.getElementById("sellBtn");
+        const buyActionBtn = document.getElementById("buyActionBtn");
+        const sellActionBtn = document.getElementById("sellActionBtn");
+
+        let selectedCoin = "BTC/USDT";
+
+        dropdownToggle.addEventListener("click", () => {
+        dropdownPanel.classList.toggle("open");
+    });
+
+        coinSearchInput.addEventListener("input", () => {
+        const filter = coinSearchInput.value.toLowerCase();
+        coinItems.forEach(item => {
+        const coinName = item.querySelector(".coin-left").textContent.toLowerCase();
+        item.style.display = coinName.includes(filter) ? "flex" : "none";
+    });
+    });
+
+        coinItems.forEach(item => {
+        item.addEventListener("click", () => {
+        selectedCoin = item.querySelector(".coin-left").textContent;
+        dropdownToggle.innerHTML = `${selectedCoin} <span class="arrow">&#9662;</span>`;
+        dropdownPanel.classList.remove("open");
+        fetchLivePrice(selectedCoin);
+    });
+    });
+
+        function fetchLivePrice(coinName) {
+        fetch(`/trade/price?symbol=${encodeURIComponent(coinName)}`)
+        .then(res => res.json())
+        .then(price => {
+        priceInput.value = price.toFixed(4);
+        recalculateOrderValue();
+    });
+    }
+
+        function recalculateOrderValue() {
+        const price = parseFloat(priceInput.value);
+        const qty = parseFloat(quantityInput.value);
+        if (!isNaN(price) && !isNaN(qty)) {
+        orderValueInput.value = (price * qty).toFixed(4);
+    } else {
+        orderValueInput.value = "";
+    }
+    }
+
+        quantityInput.addEventListener("input", recalculateOrderValue);
+
+        buyBtn.addEventListener("click", () => {
+        buyBtn.classList.add("active");
+        sellBtn.classList.remove("active");
+        buyActionBtn.classList.remove("hidden");
+        sellActionBtn.classList.add("hidden");
+    });
+
+        sellBtn.addEventListener("click", () => {
+        sellBtn.classList.add("active");
+        buyBtn.classList.remove("active");
+        sellActionBtn.classList.remove("hidden");
+        buyActionBtn.classList.add("hidden");
+    });
+
+        buyActionBtn.addEventListener("click", () => {
+        const qty = parseFloat(quantityInput.value);
+        const price = parseFloat(priceInput.value);
+        if (isNaN(qty) || isNaN(price)) return;
+
+        const order = {
+        type: "Buy",
+        coinName: selectedCoin,
+        quantity: qty,
+        totalAmount: price * qty,
+        breakevenPrice: price
+    };
+
+        fetch("/trade/buy", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(order)
+    })
+        .then(() => addToOrderHistory(order));
+    });
+
+        sellActionBtn.addEventListener("click", () => {
+        const qty = parseFloat(quantityInput.value);
+        const price = parseFloat(priceInput.value);
+        if (isNaN(qty) || isNaN(price)) return;
+
+        const order = {
+        type: "Sell",
+        coinName: selectedCoin,
+        quantity: qty,
+        totalAmount: price * qty
+    };
+
+        fetch("/trade/sell", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(order)
+    })
+        .then(() => addToOrderHistory(order));
+    });
+
+        function addToOrderHistory(order) {
+        const div = document.createElement("div");
+        div.className = "order-item";
+        div.innerHTML = `
+            <strong>[${order.type}]</strong> ${order.coinName} - Qty: ${order.quantity}, Value: $${order.totalAmount.toFixed(4)}
+            ${order.breakevenPrice ? `, Breakeven: $${order.breakevenPrice.toFixed(4)}` : ""}
+        `;
+        orderHistoryList.prepend(div);
+    }
+
+    });
+
+</script>
+
+</body>
+</html>

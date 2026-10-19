@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>BitXchange - Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" th:href="@{/styles.css}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+<!-- Navigation Bar -->
+<header>
+    <div class="header-content">
+        <div class="left-section">
+            <div class="logo-brand">
+
+                <img th:src="@{/images/Capture.png}" />
+                <h1 class="brand">BitXchange</h1>
+            </div>
+            <nav class="left-nav">
+                <a th:href="@{/market}">Market</a>
+                <a th:href="@{/trade}">Trade</a>
+                <a th:href="@{/asset}">Asset</a>
+                <a th:href="@{/profile}">Profile</a>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<!-- Main Content -->
+<main class="dashboard-main">
+    <!-- Total Asset Section -->
+    <section class="asset-section">
+        <h2>Total Asset Value</h2>
+        <div class="asset-value-field">
+            <input type="password" id="assetValue" th:value="${totalAssetValue}" readonly />
+            <span id="toggleAsset" class="fa-solid fa-eye-slash" title="Show/Hide"></span>
+
+            <button class="add-funds-button"
+                    th:attr="onclick=|location.href='@{/p2pbuy}'|">
+                Add Funds
+            </button>
+
+
+        </div>
+    </section>
+
+    <!--  Watchlist Section -->
+    <section class="watchlist-section">
+        <h3 class="watchlist-title">Your Watchlist</h3>
+        <div class="watchlist-scroll">
+            <div class="watchlist-item" th:each="coin : ${watchLists}">
+                <div class="watchlist-left">
+
+                    <span class="coin-name" th:text="${coin.symbol} + '/USDT'"></span>
+                </div>
+                <div class="watchlist-right">
+                    <span class="coin-price" th:text="'$' + ${coin.price}">Loading...</span>
+                    <i class="fas fa-trash remove-icon" th:onclick="'removeCoin(\'' + ${coin.symbol} + '\')'" title="Remove"></i>
+                </div>
+                <p th:text="'Watchlist Size: ' + ${#lists.size(watchlist)}"></p>
+
+            </div>
+        </div>
+    </section>
+
+
+
+
+<!--News Box-->
+
+    <div class="news-box">
+        <h3 class="news-title">Latest News</h3>
+        <div class="news-scroll" id="newsContainer">
+            <div class="news-item" th:each="news : ${newsList}">
+                <strong th:text="${news.title}">News Title</strong>
+                <p th:text="${news.content}">News Content</p>
+                <small>
+                    Source: <span th:text="${news.source}"></span> |
+                    <a th:href="${news.url}" target="_blank">Read More</a>
+                </small>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- Toggle Script -->
+<script>
+    const toggleBtn = document.getElementById("toggleAsset");
+    const assetInput = document.getElementById("assetValue");
+
+    toggleBtn.addEventListener("click", () => {
+        const hidden = assetInput.type === "password";
+        assetInput.type = hidden ? "text" : "password";
+        toggleBtn.classList.toggle("fa-eye");
+        toggleBtn.classList.toggle("fa-eye-slash");
+    });
+
+    function removeCoin(symbol) {
+        fetch(`/watchlist/remove/${symbol}`, { method: 'POST' })
+            .then(() => location.reload())
+            .catch(err => console.error('Error removing coin:', err));
+    }
+</script>
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    localStorage.setItem("userEmail", /*[[${session.userEmail}]]*/ '');
+    /*]]>*/
+</script>
+
+</body>
+</html>

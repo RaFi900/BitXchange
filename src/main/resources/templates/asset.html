@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>BitXchange - Assets</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="styles.css" />
+  <!-- Font Awesome for eye icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+<!-- Navigation Bar -->
+<header>
+  <div class="header-content">
+    <div class="left-section">
+      <div class="logo-brand">
+          <img th:src="@{/images/Capture.png}" />
+        <h1 class="brand">BitXchange</h1>
+      </div>
+      <nav class="left-nav">
+
+          <a th:href="@{/dashboard}">Home</a>
+          <a th:href="@{/market}">Market</a>
+          <a th:href="@{/trade}">Trade</a>
+
+          <a th:href="@{/profile}">Profile</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<!-- Asset Value Section -->
+<section class="asset-section">
+  <h2>Total Asset Value</h2>
+  <div class="asset-value-field">
+
+      <input type="password" id="assetValue" th:value="${totalValue}" readonly />
+
+      <span id="toggleAsset" class="fa-solid fa-eye-slash" title="Show/Hide"></span>
+    <div class="funds-buttons">
+
+        <form action="/p2pbuy" method="get">
+            <button type="submit" class="add-funds-button">Add Funds</button>
+        </form>
+        <form action="/p2psell" method="get">
+            <button type="submit" class="withdraw-button">Withdraw</button>
+        </form>
+
+    </div>
+  </div>
+</section>
+
+<!-- Coin Holdings Section -->
+<section class="coin-holdings-section">
+  <h3>Your Assets</h3>
+  <div class="coin-holdings-list">
+
+
+      <div class="coin-row" th:each="coin : ${holdings}">
+          <div class="coin-info">
+              <div>
+                  <strong th:text="${coin.coinName}">Coin</strong>
+                  <p th:text="${coin.coinName}">Symbol</p>
+              </div>
+          </div>
+          <div class="coin-amounts">
+              <div th:text="${coin.quantity}">0</div>
+              <div class="usd-text">≈ <span th:text="${coin.usdValue}"></span> USD</div>
+          </div>
+      </div>
+  </div>
+  </div>
+</section>
+
+<!-- Toggle Script -->
+<script>
+  const toggleBtn = document.getElementById("toggleAsset");
+  const assetInput = document.getElementById("assetValue");
+
+  toggleBtn.addEventListener("click", () => {
+    const hidden = assetInput.type === "password";
+    assetInput.type = hidden ? "text" : "password";
+    toggleBtn.classList.toggle("fa-eye");
+    toggleBtn.classList.toggle("fa-eye-slash");
+  });
+</script>
+</body>
+</html>

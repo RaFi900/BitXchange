@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BitXchange Exchange</title>
+
+
+    <link rel="stylesheet" th:href="@{/styles.css}" />
+</head>
+<body>
+<header>
+    <div class="header-content">
+        <div class="left-section">
+            <div class="logo-brand">
+                <!--  Logo image with Thymeleaf -->
+<!--                <img th:src="@{/Capture.PNG}" alt="BitXchange Logo" class="logo" />-->
+                <img th:src="@{/images/Capture.png}" />
+                <h1 class="brand">BitXchange</h1>
+            </div>
+
+            <!--  Left Navigation -->
+            <nav class="left-nav">
+                <div class="dropdown">
+                    <a href="#" class="dropdown-toggle">Buy Crypto</a>
+                    <div class="dropdown-menu">
+                        <a href="#" class="dropdown-item">
+                            <strong>Credit/Debit Card</strong><br />
+                            <span>(Buy crypto via VISA or Mastercard)</span>
+                        </a>
+                        <a th:href="@{/p2p}" class="dropdown-item">
+                            <strong>P2P Trading</strong><br />
+                            <span>(Buy crypto from merchants)</span>
+                        </a>
+                    </div>
+                </div>
+<!--                <a th:href="@{/cryptomarket}" class="nav-link">Crypto Market</a>-->
+                <a th:href="@{/cryptomarket}">Crypto Market</a>
+
+            </nav>
+        </div>
+
+        <!--  Right Navigation -->
+        <nav class="right-nav">
+            <a th:href="@{/signup}" class="nav-link">Sign up</a>
+            <a th:href="@{/login}" class="nav-link">Log in</a>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <section class="hero">
+        <h2>Trade Crypto Like a Pro</h2>
+        <p>Buy, sell, and track cryptocurrency prices live.</p>
+        <a th:href="@{/signup}" id="getStartedBtn" class="btn">Get Started</a>
+    </section>
+
+    <!--  Crypto Image -->
+    <div class="crypto-prices">
+        <img th:src="@{/images/Capture1.PNG}" alt="Crypto Prices" />
+<!--        <img th:src="@{/images/Capture.png}" />-->
+    </div>
+</main>
+
+<!--  JS Animation -->
+<script th:inline="javascript">
+    const btn = document.getElementById('getStartedBtn');
+    btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        btn.classList.add('fade-out');
+        setTimeout(() => {
+            window.location.href = btn.getAttribute('href');
+        }, 500);
+    });
+</script>
+</body>
+</html>

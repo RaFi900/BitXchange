@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>BitXchange - Market</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" th:href="@{/styles.css}" />
+
+    <!-- Font Awesome for eye/eye-slash icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+<!-- Navigation Bar -->
+<header>
+    <div class="header-content">
+        <div class="left-section">
+            <div class="logo-brand">
+
+                <img th:src="@{/images/Capture.png}" />
+                <h1 class="brand">BitXchange</h1>
+            </div>
+            <nav class="left-nav">
+
+                <a th:href="@{/dashboard}">Home</a>
+
+                <a th:href="@{/trade}">Trade</a>
+                <a th:href="@{/asset}">Asset</a>
+                <a th:href="@{/profile}">Profile</a>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<!-- Market Section -->
+<div class="section-box">
+    <div class="section-header">
+        <h2 class="section-title">Markets</h2>
+        <input type="text" class="input-field search-input" placeholder="Search coins..." />
+
+
+    </div>
+
+    <div class="table-box market-table">
+        <div class="table-header">
+            <span>Coin</span>
+            <span>Last Price</span>
+            <span>24h Change</span>
+            <span>24h Volume</span>
+
+        </div>
+
+
+        <div class="table-row clickable"
+             th:each="coin : ${marketCoins}"
+             th:attr="data-symbol=${coin.symbol},
+              data-price=${coin.price},
+              data-change=${coin.change},
+              data-volume=${coin.volume},
+              onclick=|window.location.href='/market/coin/${coin.symbol}'|">
+
+            <span><strong th:text="${coin.symbol} + '/USDT'">BTC/USDT</strong></span>
+            <span th:text="'$' + ${coin.price}">$65,120</span>
+            <span th:text="${coin.change}"
+                  th:classappend="${coin.change.startsWith('+')} ? 'text-positive' : 'text-negative'">+2.35%</span>
+            <span th:text="${coin.volume}">$12.4B</span>
+
+
+
+            <span class="watchlist-icon"
+                  th:attr="onclick=|event.stopPropagation(); addToWatchlist('${coin.symbol}')|">
+    <i class="fa-regular fa-star"></i>
+</span>
+
+        </div>
+
+    </div>
+</div>
+
+
+<script>
+function addToWatchlist(symbol) {
+fetch(`/watchlist/add/${symbol}`, {
+method: "POST"
+}).then(res => {
+if (res.ok) {
+alert(symbol + " added to Watchlist!");
+} else {
+alert("Error adding to Watchlist.");
+}
+}).catch(err => {
+console.error(err);
+alert("Error adding to Watchlist.");
+});
+}
+</script>
+
+<script>
+    document.querySelector('.search-input').addEventListener('input', function () {
+        const query = this.value.trim();
+        if (query === "") {
+            window.location.href = "/market";
+        } else {
+            window.location.href = "/market/search?query=" + encodeURIComponent(query);
+        }
+    });
+</script>
+
+</body>
+</html>

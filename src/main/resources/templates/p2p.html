@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BitXchange - P2P</title>
+  <link rel="stylesheet" th:href="@{/styles.css}" />
+</head>
+<body>
+<header>
+  <div class="header-content">
+    <div class="left-section">
+      <div class="logo-brand">
+        <img th:src="@{/images/Capture.png}" />
+        <h1 class="brand">BitXchange</h1>
+      </div>
+      <nav class="left-nav">
+        <a th:href="@{/p2p}">Buy Crypto</a>
+        <a th:href="@{/market}">Markets</a>
+      </nav>
+    </div>
+    <nav class="right-nav">
+      <a th:href="@{/signup}">Sign up</a>
+      <a th:href="@{/login}">Log in</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <h2>Buy Crypto via P2P</h2>
+    <p>Select a merchant and pay securely to buy crypto.</p>
+  </section>
+
+  <section class="p2p-market">
+    <table class="market-table">
+      <thead>
+      <tr>
+        <th>Merchant</th>
+        <th>Payment Method</th>
+        <th>Price (USDT)</th>
+        <th>Available</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="offer : ${buyOffers}">
+        <td th:text="${offer.merchantName}">CryptoBoss</td>
+        <td th:text="${offer.paymentMethod}">Bank Transfer</td>
+        <td th:text="${offer.price}">1.00</td>
+        <td th:text="${offer.availableAmount} + ' USDT'">1500 USDT</td>
+        <td>
+          <form th:action="@{/p2p/buy}" method="post">
+            <input type="hidden" name="offerId" th:value="${offer.id}" />
+            <button type="submit" class="btn">Buy</button>
+          </form>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </section>
+</main>
+</body>
+</html>

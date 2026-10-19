@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BitXchange - Crypto Market</title>
+  <link rel="stylesheet" th:href="@{/styles.css}" />
+</head>
+<body>
+<header>
+  <div class="header-content">
+    <div class="left-section">
+      <div class="logo-brand">
+        <img th:src="@{/images/Capture.png}" />
+        <h1 class="brand">BitXchange</h1>
+      </div>
+      <nav class="left-nav">
+        <a th:href="@{/}">Buy Crypto</a>
+
+      </nav>
+    </div>
+
+    <nav class="right-nav">
+      <a th:href="@{/signup}">Sign up</a>
+      <a th:href="@{/login}">Log in</a>
+      <!-- Optionally show logout if session exists -->
+
+    </nav>
+  </div>
+</header>
+
+<main style="padding: 2rem;">
+  <h2 style="margin-bottom: 1rem;">Market Prices</h2>
+  <table class="market-table">
+    <thead>
+    <tr>
+      <th>Pair</th>
+      <th>Price (USD)</th>
+      <th>24h Change</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="coin : ${marketData}">
+      <td th:text="${coin.pair}"></td>
+      <td th:text="${coin.price}"></td>
+      <td th:text="${coin.changePercent + '%'}"
+          th:classappend="${T(java.lang.Double).parseDouble(coin.changePercent) >= 0} ? 'positive' : 'negative'">
+      </td>
+    </tr>
+    </tbody>
+
+    <!-- JS will dynamically update rows here -->
+    </tbody>
+  </table>
+</main>
+
+
+</body>
+</html>

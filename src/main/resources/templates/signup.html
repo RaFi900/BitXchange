@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>BitXchange - Sign Up</title>
+    <link rel="stylesheet" th:href="@{/styles.css}" />
+</head>
+<body>
+<!-- Header with Thymeleaf image -->
+<header class="simple-header">
+    <div class="logo-brand">
+        <img th:src="@{/images/Capture.png}" />
+        <h1 class="brand">BitXchange</h1>
+    </div>
+</header>
+
+<!-- Signup Form Container -->
+<div class="auth-container">
+    <h2>Create Your BitXchange Account</h2>
+
+    <div th:if="${signupError}" class="error-message">
+        <p th:text="${signupError}"></p>
+    </div>
+
+    <!-- Form sends POST request to /signup, binding User object -->
+    <form th:action="@{/signup}" th:object="${user}" method="post">
+
+        <input type="text" th:field="*{name}" placeholder="Name" required />
+        <div class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+
+
+        <input type="email" th:field="*{email}" placeholder="Email" required />
+        <div class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+
+
+        <div class="password-field">
+            <input type="password" th:field="*{password}" placeholder="Password" id="signup-password" required />
+            <span class="toggle-password" onclick="togglePassword('signup-password', this)">👁️</span>
+        </div>
+        <div class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+
+
+        <button type="submit" class="btn">Create Account</button>
+
+        <!-- Backend error (like email already exists) -->
+        <div class="error" th:if="${signupError}" th:text="${signupError}"></div>
+    </form>
+
+    <p>Already have an account? <a th:href="@{/login}">Log in</a></p>
+</div>
+
+<!-- Password toggle JS (frontend) -->
+<script>
+    function togglePassword(inputId, icon) {
+        const input = document.getElementById(inputId);
+        if (input.type === "password") {
+            input.type = "text";
+            icon.textContent = "🙈";
+        } else {
+            input.type = "password";
+            icon.textContent = "👁️";
+        }
+    }
+</script>
+</body>
+</html>
