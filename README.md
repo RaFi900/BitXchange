@@ -1,8 +1,8 @@
 # BitXchange
 
-BitXchange is an academic/demo cryptocurrency trading dashboard built with Java, Spring Boot, Thymeleaf, and MongoDB. It includes market-data views, user sign-up/login flows, watchlists, asset summaries, buy/sell and P2P transaction screens, and crypto-news display.
+BitXchange is an demo cryptocurrency trading dashboard built with Java, Spring Boot, Thymeleaf, and MongoDB. It includes market-data views, user sign-up/login flows, watchlists, asset summaries, buy/sell and P2P transaction screens, and crypto-news display.
 
-> **Disclaimer:** This is a learning/demo project, not a production exchange or financial service. Do not use it for real-money trading or store real financial credentials in it.
+> **Disclaimer:** This is a demo project, not a production exchange or financial service. Do not use it for real-money trading or store real financial credentials in it.
 
 ## Technology stack
 
